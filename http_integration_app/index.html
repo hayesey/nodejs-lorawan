@@ -1,0 +1,65 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>HTTP Endpoint</h1>
+    <div id="graph">
+      <line-chart :data="data.data" xtitle="Date" ytitle="Temperature"></line-chart>
+    </div>
+    <div class="on-off">
+      <div id="turn_on">
+	<form id="turn_on" class="turn-on" method="POST" action="/on">
+	  <button type="submit" value="Led on" id="on">On</button>
+	</form>
+      </div>
+      <div id="turn_off">
+	<form class="turn-off" id="turn_off" method="POST" action="/off">
+	  <button type="submit" value="Led off" id="off">Off</button>
+	</form>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/chart.js@2.5.0/dist/Chart.bundle.js"></script>
+    <script src="https://unpkg.com/chartkick@2.2.3"></script>
+    <script src="https://unpkg.com/vue-chartkick@0.2.0/dist/vue-chartkick.js"></script>
+    <ul id="uplink"></ul>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      var app_data = {
+
+      }
+
+      var graph = new Vue({
+      el: "#graph",
+      data: {
+      data: app_data,
+      }
+      })
+
+      function fetchData() {
+      fetch("/chartdata")
+      .then(function (response) {
+      if (response.status >= 200 && response.status < 300) {
+						      return Promise.resolve(response.json())
+						      } else {
+						      return Promise.reject(new Error(response.statusText))
+						      }
+						      })
+						      .then(function (data) {
+						      Vue.set(app_data, 'data', data)
+						      //setTimeout(fetchData, 1000)
+						      })
+						      }
+						      fetchData()
+						      </script>
+    <script>
+      $(function () {
+      var socket = io();
+      socket.on('message', function(msg){
+      $('#uplink').append($('<li>').text(JSON.stringify(msg)));
+	});
+	});
+    </script>
+  </body>
+  </html>

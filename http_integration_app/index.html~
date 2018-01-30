@@ -1,0 +1,18 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>HTTP Endpoint</h1>
+    <ul id="uplink"></ul>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      $(function () {
+      var socket = io();
+      socket.on('message', function(msg){
+      $('#uplink').append($('<li>').text(JSON.stringify(msg)));
+	});
+	});
+    </script>
+  </body>
+</html>
