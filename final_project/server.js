@@ -13,8 +13,6 @@ const accessKey = "ttn-account-v2.fM3yZyyeCezGVhPYe6Q8FAe7KNou_EfMsHSHlt2sfTE" /
 
 const server = express()
 //
-// we will buffer data here
-const buffer = []
 
 // get the path to the directory in which is the file
 const dir = process.env.DATA_DIR || "."
@@ -23,7 +21,36 @@ const file = path.resolve(dir, "data.json")
 // open the file named data.json as we previously set it up in the const file.
 fs.openSync(file, 'a')
 
+// function reading the data and returning a promise with the JSON data.
+const read = function () {
+    return new Promise(function (resolve, reject) {
+	// start reading the file
+	fs.readFile(file, "utf8", function (err, data) {
+	    if (err) {
+		return reject(err)
+	    }
+	    // return the parsed data
+	    return resolve(JSON.parse(data || "[]"))
+	})
+    })
+}
 
+// function writing the data to the JSON file.
+const write = function (data) {
+    return new Promise(function (resolve, reject) {
+	fs.writeFile(file, JSON.stringify(data), "utf8", function (err) {
+	    if (err) {
+		return reject(err)
+	    }
+	    return resolve()
+	})
+    })
+}
+
+// we will buffer data here
+buffer = []
+
+read().then(data => buffer = data)
 
 ws(server)
 
@@ -34,6 +61,7 @@ server.ws("/data", function (ws, req) {
     ttn.data(appID, accessKey)
         .then(function (client) {
 	    // send all items in the buffer
+	    console.log("buffer ", buffer)
 	    buffer.forEach(function (payload) {
 		ws.send(JSON.stringify(payload))
 	    })
@@ -45,6 +73,7 @@ server.ws("/data", function (ws, req) {
 
 		// store the payload in the buffer
 		buffer.push(payload)
+		write(buffer)
 	    })
 
 	    ws.on("close", function () {
