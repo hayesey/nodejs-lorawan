@@ -1,0 +1,14 @@
+<!-- public/index.html -->
+<!doctype html>
+<html>
+  <body>
+    Data Visualisation
+    <div id="graphtemperature" style="width: 100%; height=500px;"></div>
+    <button id="downlink-on">Led On</button>
+    <button id="downlink-off">Led Off</button>
+<!--    <div id="graphpressure" style="width: 100%; height=500px;"></div>
+    <div id="graphbattery" style="width: 100%; height=500px;"></div>-->
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="/client.js" ></script>
+  </body>
+  </html>
