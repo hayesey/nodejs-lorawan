@@ -44,7 +44,8 @@ var chartl1 = Highcharts.chart("graphl1", {
 	},
 	labels: {
 	    formatter: function () {
-		return Highcharts.dateFormat("%H:%M:%S", this.value)
+		//return Highcharts.dateFormat("%H:%M:%S", this.value)
+		return Highcharts.dateFormat("%H:%M %d/%m", this.value)
 	    },
 	},
     },
@@ -73,7 +74,8 @@ var chartl2 = Highcharts.chart("graphl2", {
 	},
 	labels: {
 	    formatter: function () {
-		return Highcharts.dateFormat("%H:%M:%S", this.value)
+		//return Highcharts.dateFormat("%H:%M:%S", this.value)
+		return Highcharts.dateFormat("%H:%M %d/%m", this.value)
 	    },
 	},
     },
@@ -102,7 +104,8 @@ var chartl3 = Highcharts.chart("graphl3", {
 	},
 	labels: {
 	    formatter: function () {
-		return Highcharts.dateFormat("%H:%M:%S", this.value)
+		//return Highcharts.dateFormat("%H:%M:%S", this.value)
+		return Highcharts.dateFormat("%H:%M %d/%m", this.value)
 	    },
 	},
     },
@@ -131,7 +134,8 @@ var chartl4 = Highcharts.chart("graphl4", {
 	},
 	labels: {
 	    formatter: function () {
-		return Highcharts.dateFormat("%H:%M:%S", this.value)
+		//return Highcharts.dateFormat("%H:%M:%S", this.value)
+		return Highcharts.dateFormat("%H:%M %d/%m", this.value)
 	    },
 	},
     },
@@ -161,7 +165,8 @@ var chartbatt = Highcharts.chart("graphbattery", {
 	},
 	labels: {
 	    formatter: function () {
-		return Highcharts.dateFormat("%H:%M:%S", this.value)
+		//return Highcharts.dateFormat("%H:%M:%S", this.value)
+		return Highcharts.dateFormat("%H:%M %d/%m", this.value)
 	    },
 	},
     },
