@@ -82,11 +82,16 @@ ttn.data(appID, accessKey)
 	ws.close()
     })
 
-app.ws("/data", function (ws, req) {
+app.ws("/data/:count", function (ws, req) {
     console.log("New websocket opened")
+    var pcount = req.params.count
+    console.log("req.params.count: ", pcount)
     // send all items in the buffer
-    console.log("buffer ", buffer)
-    buffer.forEach(function (payload) {
+    //console.log("buffer ", buffer)
+    // sends all items in array
+    //buffer.forEach(function (payload) {
+    // sends last 500 items in array
+    buffer.slice(Math.max(buffer.length - pcount, 1)).forEach(function (payload) {
 	ws.send(JSON.stringify(payload))
     })
 

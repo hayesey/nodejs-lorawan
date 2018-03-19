@@ -1,5 +1,5 @@
 // public/client.js
-const ws = new WebSocket("ws://" + window.location.host + "/data")
+const ws = new WebSocket("ws://" + window.location.host + "/data/500")
 
 ws.addEventListener("open", function () {
     console.log("Socket opened!")
