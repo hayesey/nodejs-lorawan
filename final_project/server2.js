@@ -1,12 +1,17 @@
 const ttn = require("ttn")
 const express = require("express")
 var expressWs = require("express-ws")
+var basicAuth = require('express-basic-auth')
 const fs = require("fs")
 const path = require("path")
 var expressWs = expressWs(express())
 
 var app = expressWs.app
-
+app.use(basicAuth({
+    users: {'paul': 'yk57ufc'},
+    challenge: true,
+    realm: 'nodesensors',
+}))
 console.log("Starting server ...")
 
 const appID = "dampness-monitor" // Change this to your app ID
