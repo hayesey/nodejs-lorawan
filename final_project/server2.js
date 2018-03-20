@@ -5,10 +5,11 @@ var basicAuth = require('express-basic-auth')
 const fs = require("fs")
 const path = require("path")
 var expressWs = expressWs(express())
+var config = require('./config.js')
 
 var app = expressWs.app
 app.use(basicAuth({
-    users: {'paul': 'yk57ufc'},
+    users: config.users,
     challenge: true,
     realm: 'nodesensors',
 }))
