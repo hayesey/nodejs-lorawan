@@ -1,0 +1,4 @@
+// copy to config.js and edit...
+module.exports = {
+    users: {'user': 'pass'}
+}
